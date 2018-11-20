@@ -8,12 +8,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
+    <tr *ngFor="let client of clients">
+      <th scope="row">{{client.id}}</th>
+      <td>{{client.name}}</td>
+      <td>{{client.email}}</td>
       <td class="text-center">
-        <a href="" class="btn btn-sm btn-info">Ver/Editar</a>
+        <a routerLink="/form/{{client.id}}" class="btn btn-sm btn-info">Ver/Editar</a>
+        <button type="button" (click)=delete(client.id) class="btn btn-sm btn-danger">Eliminar</button>
       </td>
     </tr>
   </tbody>

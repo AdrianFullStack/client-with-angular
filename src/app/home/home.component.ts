@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   clients: Client[];
   constructor(private clientService: ClientsService) {
     this.clientService.get().subscribe( (data: Client[]) => {
+      console.log(data);
       this.clients = data;
     }, (error) => {
       console.log(error);
@@ -19,6 +20,18 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  delete(id) {
+    if (confirm('Está seguro de eliminar el cliente?')) {
+        this.clientService.delete(id).subscribe((data) => {
+            this.clients = this.clients.filter(client => client.id !== id);
+            console.log(data);
+            alert('Eliminado con éxito');
+        }, (error) => {
+            console.log(error);
+        });
+    }
   }
 
 }
